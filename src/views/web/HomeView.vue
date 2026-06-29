@@ -611,12 +611,12 @@
     <!-- Floating Contact Button (desktop only) -->
     <div class="contact-btn" v-if="!isMobile" @click="toggleContactPopup">
       <i class="bi bi-people-fill"></i>
-      平台客服
+      Platform Support
     </div>
 
      <!-- Redirect Message -->
     <div class="redirect-message" v-show="showContactPopup">
-        <span class="text">正在跳转平台客服</span><span class="dots"></span>
+        <span class="text">Redirecting to Platform Support</span><span class="dots"></span>
     </div>
     
     <!-- 移动端底部快速操作栏 -->
@@ -643,7 +643,7 @@
           <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
           <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
         </svg>
-        <span class="mobile-btn-label">平台客服</span>
+        <span class="mobile-btn-label">Support</span>
       </button>
     </div>
     <!-- Contact Popup
