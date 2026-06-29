@@ -16,10 +16,11 @@ not_found_handling = "single-page-application"
 binding = "ASSETS"
 run_worker_first = true
 
+# 路由：请先将 linqiang.com 添加到 Cloudflare（DNS 托管）
 [[routes]]
 pattern = "linqiang.com/*"
 zone_name = "linqiang.com"
 
 [[routes]]
-pattern = "www.linqiang.com"
-custom_domain = true
+pattern = "www.linqiang.com/*"
+zone_name = "linqiang.com"
