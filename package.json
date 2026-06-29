@@ -10,7 +10,7 @@
     "deploy": "npm run deploy:qianduan",
     "deploy:qianduan": "cp wrangler.qianduan.toml wrangler.toml && npm run build && wrangler deploy",
     "deploy:allen": "cp wrangler.allen-klee.toml wrangler.toml && npm run build && wrangler deploy",
-    "deploy:ben-snide": "cp wrangler.ben-snide.toml wrangler.toml && npm run build && wrangler deploy",
+    "deploy:ben-snider": "cp wrangler.ben-snider.toml wrangler.toml && npm run build && wrangler deploy",
     "deploy:linqiang": "cp wrangler.linqiang.toml wrangler.toml && npm run build && wrangler deploy",
     "deploy:preview": "npm run build && wrangler dev"
   },

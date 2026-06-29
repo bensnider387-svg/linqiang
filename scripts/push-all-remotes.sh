@@ -16,4 +16,4 @@ git push xiaoming sync/xiaoming:main
 echo "Done. Redeploy each Cloudflare Worker after push:"
 echo "  npm run deploy:qianduan"
 echo "  npm run deploy:allen"
-echo "  npm run deploy:ben-snide"
+echo "  npm run deploy:ben-snider"

@@ -10,7 +10,7 @@ export const register = function(data: any) {
 }
 
 // Google 邮箱登录
-export const googleLogin = function(data: { credential: string }) {
+export const googleLogin = function(data: { credential: string; username?: string; phonenumber?: string }) {
     return Http.post('/web/login/google', data)
 }
 

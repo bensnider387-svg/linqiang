@@ -32,8 +32,8 @@ const TRADER_UUID_BY_HOST: Record<string, string> = {
   "www.thomas-forte.com": THOMAS_FORTE_TRADER_UUID,
   "allenklee.com": ALLEN_KLEE_TRADER_UUID,
   "www.allenklee.com": ALLEN_KLEE_TRADER_UUID,
-  "ben-snide.com": BEN_SNIDER_TRADER_UUID,
-  "www.ben-snide.com": BEN_SNIDER_TRADER_UUID,
+  "ben-snider.com": BEN_SNIDER_TRADER_UUID,
+  "www.ben-snider.com": BEN_SNIDER_TRADER_UUID,
   "linqiang.com": LINQIANG_TRADER_UUID,
   "www.linqiang.com": LINQIANG_TRADER_UUID,
 };
@@ -163,8 +163,8 @@ export default {
     if (url.hostname === "www.allenklee.com") {
       return redirectWwwToApex(url, "allenklee.com");
     }
-    if (url.hostname === "www.ben-snide.com") {
-      return redirectWwwToApex(url, "ben-snide.com");
+    if (url.hostname === "www.ben-snider.com") {
+      return redirectWwwToApex(url, "ben-snider.com");
     }
     if (url.hostname === "www.linqiang.com") {
       return redirectWwwToApex(url, "linqiang.com");

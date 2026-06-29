@@ -91,6 +91,7 @@
 
             <div class="google-login-wrap">
               <button
+                v-if="!showGoogleProfileForm"
                 type="button"
                 class="google-signin-btn"
                 :disabled="isLoggingIn"
@@ -101,6 +102,69 @@
               </button>
               <div ref="googleButtonRef" class="google-login-btn"></div>
               <p v-if="googleLoginError" class="google-login-error">{{ googleLoginError }}</p>
+            </div>
+
+            <div v-if="showGoogleProfileForm" class="google-profile-form">
+              <div class="google-profile-header">
+                <h3 class="google-profile-title">Complete Your Profile</h3>
+                <p class="google-profile-subtitle">Set your username and phone number to finish Google sign-in</p>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">
+                  <span class="label-icon">📧</span>
+                  Gmail
+                </label>
+                <input type="email" class="form-input" :value="googleEmail" readonly>
+              </div>
+
+              <div class="form-group">
+                <label for="google-username" class="form-label">
+                  <span class="label-icon">👤</span>
+                  Username
+                </label>
+                <input
+                  id="google-username"
+                  type="text"
+                  v-model="googleUsername"
+                  class="form-input"
+                  placeholder="Choose a username"
+                  :class="{ 'error': googleUsernameError }"
+                >
+                <div v-if="googleUsernameError" class="error-message">
+                  <span class="error-icon">⚠️</span>
+                  {{ googleUsernameError }}
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="google-phone" class="form-label">
+                  <span class="label-icon">📱</span>
+                  Phone Number
+                </label>
+                <input
+                  id="google-phone"
+                  type="tel"
+                  v-model="googlePhone"
+                  class="form-input"
+                  placeholder="+1 234 567 8900"
+                  :class="{ 'error': googlePhoneError }"
+                >
+                <div v-if="googlePhoneError" class="error-message">
+                  <span class="error-icon">⚠️</span>
+                  {{ googlePhoneError }}
+                </div>
+              </div>
+
+              <button type="button" class="submit-btn" :disabled="isLoggingIn" @click="handleGoogleProfileSubmit">
+                <span v-if="isLoggingIn" class="btn-loader"></span>
+                <span v-else class="btn-icon">→</span>
+                <span>{{ isLoggingIn ? 'Saving...' : 'Continue' }}</span>
+              </button>
+
+              <button type="button" class="google-profile-cancel" :disabled="isLoggingIn" @click="cancelGoogleProfile">
+                Cancel
+              </button>
             </div>
             
             <div class="signup-prompt">
@@ -132,6 +196,99 @@ const passwordError = ref('');
 const isLoggingIn = ref(false);
 const googleButtonRef = ref<HTMLElement | null>(null);
 const googleLoginError = ref('');
+const showGoogleProfileForm = ref(false);
+const googleCredential = ref('');
+const googleEmail = ref('');
+const googleUsername = ref('');
+const googlePhone = ref('');
+const googleUsernameError = ref('');
+const googlePhoneError = ref('');
+
+const resetGoogleProfileForm = () => {
+  showGoogleProfileForm.value = false;
+  googleCredential.value = '';
+  googleEmail.value = '';
+  googleUsername.value = '';
+  googlePhone.value = '';
+  googleUsernameError.value = '';
+  googlePhoneError.value = '';
+};
+
+const cancelGoogleProfile = () => {
+  resetGoogleProfileForm();
+  googleLoginError.value = '';
+};
+
+const validateGoogleProfile = () => {
+  googleUsernameError.value = '';
+  googlePhoneError.value = '';
+
+  const username = googleUsername.value.trim();
+  const phone = googlePhone.value.trim();
+
+  if (!username) {
+    googleUsernameError.value = 'Username is required';
+  } else if (!/^[a-zA-Z0-9_]{3,20}$/.test(username)) {
+    googleUsernameError.value = 'Username must be 3-20 characters (letters, numbers, underscore)';
+  }
+
+  if (!phone) {
+    googlePhoneError.value = 'Phone number is required';
+  } else {
+    const digits = phone.replace(/\D/g, '');
+    if (digits.length < 8 || digits.length > 15) {
+      googlePhoneError.value = 'Please enter a valid phone number';
+    }
+  }
+
+  return !googleUsernameError.value && !googlePhoneError.value;
+};
+
+const processGoogleLoginResponse = async (response: any) => {
+  if (response?.needs_profile) {
+    showGoogleProfileForm.value = true;
+    googleEmail.value = response.email || '';
+    googleUsername.value = response.suggested_username || '';
+    googlePhone.value = response.phonenumber || '';
+    googleLoginError.value = '';
+    return false;
+  }
+
+  return completeLogin(response);
+};
+
+const handleGoogleProfileSubmit = async () => {
+  if (!validateGoogleProfile() || !googleCredential.value) {
+    return;
+  }
+
+  try {
+    isLoggingIn.value = true;
+    googleLoginError.value = '';
+    const response = await googleLogin({
+      credential: googleCredential.value,
+      username: googleUsername.value.trim(),
+      phonenumber: googlePhone.value.trim()
+    });
+
+    if (response?.needs_profile) {
+      googleLoginError.value = response.message || 'Please complete your profile';
+      return;
+    }
+
+    const success = await completeLogin(response);
+    if (success) {
+      resetGoogleProfileForm();
+    } else {
+      googleLoginError.value = response.message || 'Unable to complete Google sign-in';
+    }
+  } catch (error) {
+    console.error('Google profile submit error:', error);
+    googleLoginError.value = 'Google sign-in failed. Please try again later.';
+  } finally {
+    isLoggingIn.value = false;
+  }
+};
 
 const completeLogin = async (response: any) => {
   if (response.success) {
@@ -181,8 +338,9 @@ const handleGoogleCredential = async (credential: string) => {
   try {
     isLoggingIn.value = true;
     googleLoginError.value = '';
+    googleCredential.value = credential;
     const response = await googleLogin({ credential });
-    await completeLogin(response);
+    await processGoogleLoginResponse(response);
   } catch (error) {
     console.error('Google login error:', error);
     alert('Google sign-in failed. Please try again later.');
@@ -600,6 +758,58 @@ const handleLogin = async () => {
   color: var(--color-danger);
   font-size: 13px;
   text-align: center;
+}
+
+.google-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-lg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  background: rgba(102, 126, 234, 0.06);
+}
+
+.google-profile-header {
+  margin-bottom: var(--spacing-xs);
+}
+
+.google-profile-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.google-profile-subtitle {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.google-profile-form .form-input[readonly] {
+  opacity: 0.85;
+  cursor: not-allowed;
+}
+
+.google-profile-cancel {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.google-profile-cancel:hover:not(:disabled) {
+  color: var(--text-primary);
+}
+
+.google-profile-cancel:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* 响应式设计 */
