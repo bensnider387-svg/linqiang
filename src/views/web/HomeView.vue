@@ -643,7 +643,7 @@
           <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
           <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
         </svg>
-        <span class="mobile-btn-label">Support</span>
+        <span class="mobile-btn-label mobile-btn-label--platform">Platform Support</span>
       </button>
     </div>
     <!-- Contact Popup
@@ -3458,6 +3458,13 @@ const formatLikesCount = (count: number | string | undefined) => {
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.mobile-btn-label--platform {
+  font-size: 8px;
+  line-height: 1.2;
+  white-space: normal;
+  text-align: center;
 }
 
 .mobile-bottom-btn svg {
