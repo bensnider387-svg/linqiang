@@ -1,0 +1,25 @@
+# Cloudflare Workers — linqiang.com
+name = "linqiang"
+main = "./src/index.ts"
+compatibility_date = "2025-11-25"
+workers_dev = true
+
+[vars]
+NODE_ENV = "production"
+VITE_API_URL = "https://houduan-api.onrender.com"
+VITE_Web_Trader_UUID = "8dc0a57e-3095-466f-82a0-6f80b8a6d8ed"
+VITE_GOOGLE_CLIENT_ID = "810723432233-mpgi15h8fvupa2ifqtlmpv5eiih7bvgq.apps.googleusercontent.com"
+
+[assets]
+directory = "./dist/"
+not_found_handling = "single-page-application"
+binding = "ASSETS"
+run_worker_first = true
+
+[[routes]]
+pattern = "linqiang.com/*"
+zone_name = "linqiang.com"
+
+[[routes]]
+pattern = "www.linqiang.com"
+custom_domain = true

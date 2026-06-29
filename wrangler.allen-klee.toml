@@ -1,0 +1,29 @@
+# Cloudflare Workers 配置
+name = "allen-klee"
+main = "./src/index.ts"
+compatibility_date = "2025-11-25"
+workers_dev = true
+
+[vars]
+NODE_ENV = "production"
+VITE_API_URL = "https://houduan-api.onrender.com"
+VITE_Web_Trader_UUID = "ef59ab89-c338-4b64-a988-9a19446df14b"
+# 在 Google Cloud Console 创建 OAuth Client ID 后填入（Web 应用类型）
+VITE_GOOGLE_CLIENT_ID = "810723432233-mpgi15h8fvupa2ifqtlmpv5eiih7bvgq.apps.googleusercontent.com"
+
+# 静态资源配置
+[assets]
+directory = "./dist/"
+not_found_handling = "single-page-application"
+binding = "ASSETS"
+# 所有请求先经过 Worker，以便向 index.html 注入运行时环境变量
+run_worker_first = true
+
+# 路由配置
+[[routes]]
+pattern = "allenklee.com/*"
+zone_name = "allenklee.com"
+
+[[routes]]
+pattern = "www.allenklee.com"
+custom_domain = true

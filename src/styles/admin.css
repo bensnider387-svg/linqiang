@@ -1,0 +1,205 @@
+.layui-logo {
+  width: 100%;
+  font-size: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.75);
+  height: 50px !important;
+  line-height: 50px;
+}
+
+html.admin-layout,
+body.admin-layout {
+  background: #f0f2f5 !important;
+  color: rgba(0, 0, 0, 0.88) !important;
+}
+
+.layui-layout {
+  background: #f0f2f5;
+  color: rgba(0, 0, 0, 0.88);
+  height: 100%;
+  min-height: 100vh;
+}
+
+.layui-body {
+  overflow: hidden;
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+.layui-body > .global-tab {
+  flex: 0 0 auto;
+}
+
+.layui-body > .global-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  background: whitesmoke;
+  color: rgba(0, 0, 0, 0.88);
+}
+
+.layui-body>.global-tab>.layui-tab {
+  margin: 0px;
+}
+
+.layui-body>.global-tab>.layui-tab>.layui-tab-content {
+  display: none !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+.layui-body>.global-tab>.layui-tab>.layui-tab-head {
+  z-index: 999;
+  display: block;
+  width: 100%;
+  background-color: white;
+}
+
+.layui-body>.global-tab>.layui-tab>.layui-tab-head>.layui-tab-title {
+  border-bottom: none;
+  border-left: none;
+}
+
+.layui-body>.global-tab>.layui-tab>.layui-tab-head>.layui-tab-title>li {
+  color: dimgray;
+  font-size: 14px;
+  line-height: 40px;
+  border-right: 1px solid whitesmoke;
+  border-bottom: none;
+}
+
+.layui-body>.global-tab>.layui-tab>.layui-tab-head>.layui-tab-title>li.layui-this::after {
+  border: none;
+}
+
+.layui-header {
+  box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+  background: #fff !important;
+}
+
+.layui-header .layui-nav.layui-nav-center {
+  padding: 0px;
+}
+
+.layui-header .layui-nav.layui-nav-center .layui-this {
+  background-color: whitesmoke;
+}
+
+.layui-header .layui-nav.layui-nav-center .layui-this:after {
+  display: none;
+}
+
+.layui-header .layui-nav.layui-nav-center .layui-nav-item a {
+  margin: 0px 15px;
+}
+
+.layui-header .layui-nav.layui-nav-center .layui-nav-item a * {
+  color: #666;
+}
+
+.layui-layout.has-tab .layui-header {
+  box-shadow: none;
+}
+
+.layui-header,
+.layui-header .layui-nav,
+.layui-header .layui-nav .layui-nav-item {
+  height: 50px !important;
+  line-height: 50px;
+  background: transparent;
+  z-index: 9999;
+}
+
+.layui-header .layui-nav {
+  padding: 0 15px;
+}
+
+.layui-header .layui-nav .layui-nav-item>a {
+  padding: 0 20px;
+}
+
+.layui-header .layui-nav.layui-layout-left {
+  left: 0 !important;
+  position: relative !important;
+}
+
+.layui-header .layui-nav * {
+  font-size: 14px;
+  color: #393d49;
+}
+
+.layui-side {
+  z-index: 10000;
+  background: rgb(34, 36, 37, 98%);
+  box-shadow: 2px 0 8px 0 rgb(29 35 41 / 5%);
+}
+
+.layui-side.light {
+  background-color: white !important;
+}
+
+.layui-side.light .layui-logo {
+  border-bottom: 1px solid whitesmoke;
+}
+
+.layui-side .layui-nav {
+  width: 100%;
+  background-color: transparent;
+}
+
+.layui-layout.collapse .layui-logo {
+  width: 60px;
+}
+
+@media screen and (max-width: 767px) {
+  .layui-layout.collapse .layui-side {
+    width: 0 !important;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .layui-layout.collapse .layui-side {
+    width: 60px !important;
+  }
+}
+
+.layui-layout.collapse .layui-body {
+  left: 60px;
+}
+
+.layui-layout.collapse .layui-header .layui-layout-left {
+  left: 60px;
+}
+
+.layui-layout .layui-logo,
+.layui-layout .layui-side,
+.layui-layout .layui-body,
+.layui-layout .layui-header .layui-layout-left {
+  transition: all 0.3s;
+}
+
+/* 管理后台卡片恢复浅色样式，避免继承前台 glass 风格 */
+.admin-layout .layui-card,
+.admin-layout .layui-card .layui-card-header,
+.admin-layout .layui-card .layui-card-body {
+  background: #fff;
+  color: rgba(0, 0, 0, 0.88);
+}
+
+.admin-layout .global-content .layui-container {
+  background: transparent;
+}
+
+.admin-layout .layui-layout-vertical,
+.admin-layout .admin-main-layout {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+}

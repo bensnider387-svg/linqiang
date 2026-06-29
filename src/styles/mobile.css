@@ -1,0 +1,191 @@
+/* ============================================
+   全站移动端优化
+   ============================================ */
+
+@media screen and (max-width: 768px) {
+  :root {
+    --mobile-nav-height: 56px;
+    --mobile-bottom-bar-height: 72px;
+    --mobile-page-padding: 12px;
+    --mobile-safe-bottom: env(safe-area-inset-bottom, 0px);
+    --mobile-safe-top: env(safe-area-inset-top, 0px);
+  }
+
+  /* 防止横向溢出 */
+  html,
+  body,
+  #app {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  img,
+  video,
+  iframe,
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* iOS 输入框聚焦时不自动放大 */
+  input,
+  select,
+  textarea,
+  .input,
+  .form-control,
+  .form-input {
+    font-size: 16px !important;
+  }
+
+  /* 触控目标最小尺寸 */
+  button,
+  a.btn,
+  .btn,
+  [role="button"] {
+    min-height: 44px;
+  }
+
+  /* Bootstrap 模态框移动端适配 */
+  .modal-dialog {
+    margin: 12px auto;
+    max-width: calc(100% - 24px);
+  }
+
+  .modal-dialog-centered {
+    min-height: calc(100% - 24px);
+  }
+
+  .modal-content {
+    max-height: calc(100vh - 24px - var(--mobile-safe-top) - var(--mobile-safe-bottom));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .modal-body {
+    padding: 16px;
+  }
+
+  .modal-header,
+  .modal-footer {
+    padding: 14px 16px;
+  }
+
+  .modal-title {
+    font-size: 1.05rem;
+  }
+
+  /* 页面内容区通用底部留白（配合固定底栏） */
+  .page-with-bottom-bar {
+    padding-bottom: calc(var(--mobile-bottom-bar-height) + var(--mobile-safe-bottom) + 16px);
+  }
+
+  /* Hero 横幅通用压缩 */
+  [class*="-hero-banner"],
+  [class*="hero-banner"] {
+    padding-top: 40px !important;
+    padding-bottom: 32px !important;
+  }
+
+  [class*="-hero-banner"] .hero-title,
+  [class*="hero-banner"] .hero-title {
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
+    line-height: 1.25;
+  }
+
+  [class*="-hero-banner"] .hero-description,
+  [class*="hero-banner"] .hero-description {
+    font-size: 0.9375rem !important;
+    line-height: 1.6;
+  }
+
+  [class*="-hero-banner"] .hero-stats,
+  [class*="hero-banner"] .hero-stats {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px !important;
+  }
+
+  [class*="-hero-banner"] .hero-stat-badge,
+  [class*="hero-banner"] .hero-stat-badge {
+    min-width: 0 !important;
+    flex: 1 1 calc(50% - 10px);
+    max-width: calc(50% - 5px);
+    padding: 12px 14px !important;
+  }
+
+  /* 内容区通用内边距 */
+  [class*="-content-area"],
+  [class*="content-area"] {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* 卡片通用 */
+  .card {
+    padding: var(--spacing-md);
+  }
+
+  /* 表格横向滚动 */
+  .table-responsive,
+  [class*="table-wrapper"] {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-left: -4px;
+    margin-right: -4px;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  /* 禁用移动端 hover 位移（避免点击后卡住） */
+  .card:hover,
+  .glass-hover:hover {
+    transform: none;
+  }
+
+  /* 移动端导航打开时锁定背景滚动 */
+  body.mobile-nav-open {
+    overflow: hidden !important;
+    touch-action: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  :root {
+    --mobile-page-padding: 10px;
+    --spacing-md: 12px;
+  }
+
+  .container,
+  .container-fluid {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  [class*="-hero-banner"] .hero-stat-badge,
+  [class*="hero-banner"] .hero-stat-badge {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  [class*="-hero-banner"],
+  [class*="hero-banner"] {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .modal-dialog {
+    margin: 8px auto;
+    max-width: calc(100% - 16px);
+  }
+
+  .modal-footer {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .modal-footer .btn,
+  .modal-footer button {
+    width: 100%;
+    margin: 0 !important;
+  }
+}

@@ -1,0 +1,38 @@
+# Cloudflare Workers 配置
+name = "qianduan"
+main = "./src/index.ts"
+compatibility_date = "2025-11-25"
+workers_dev = true
+
+[vars]
+NODE_ENV = "production"
+VITE_API_URL = "https://houduan-api.onrender.com"
+VITE_Web_Trader_UUID = "c5e01236-d681-4343-8386-f9e17748f81f"
+# 在 Google Cloud Console 创建 OAuth Client ID 后填入（Web 应用类型）
+VITE_GOOGLE_CLIENT_ID = "810723432233-mpgi15h8fvupa2ifqtlmpv5eiih7bvgq.apps.googleusercontent.com"
+
+# 静态资源配置
+[assets]
+directory = "./dist/"
+not_found_handling = "single-page-application"
+binding = "ASSETS"
+# 所有请求先经过 Worker，以便向 index.html 注入运行时环境变量
+run_worker_first = true
+
+# 路由配置
+# 主域名已在控制台绑定为自定义域；www 使用 custom_domain 以便部署时自动创建 DNS
+[[routes]]
+pattern = "stevencress.com/*"
+zone_name = "stevencress.com"
+
+[[routes]]
+pattern = "www.stevencress.com"
+custom_domain = true
+
+[[routes]]
+pattern = "thomas-forte.com/*"
+zone_name = "thomas-forte.com"
+
+[[routes]]
+pattern = "www.thomas-forte.com"
+custom_domain = true

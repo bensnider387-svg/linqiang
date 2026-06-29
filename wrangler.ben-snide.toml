@@ -1,0 +1,25 @@
+# Cloudflare Workers — ben-snide.com
+name = "ben-snide"
+main = "./src/index.ts"
+compatibility_date = "2025-11-25"
+workers_dev = true
+
+[vars]
+NODE_ENV = "production"
+VITE_API_URL = "https://houduan-api.onrender.com"
+VITE_Web_Trader_UUID = "fe9af579-c264-46aa-afc9-4ebfeda17d06"
+VITE_GOOGLE_CLIENT_ID = "810723432233-mpgi15h8fvupa2ifqtlmpv5eiih7bvgq.apps.googleusercontent.com"
+
+[assets]
+directory = "./dist/"
+not_found_handling = "single-page-application"
+binding = "ASSETS"
+run_worker_first = true
+
+[[routes]]
+pattern = "ben-snide.com/*"
+zone_name = "ben-snide.com"
+
+[[routes]]
+pattern = "www.ben-snide.com"
+custom_domain = true

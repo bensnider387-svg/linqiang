@@ -1,0 +1,10 @@
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+  
+# 合并所有图片类型，共享相同的缓存头
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable  # 缩进后添加头信息
+
+# JS 文件的缓存头
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable  # 缩进后添加头信息

@@ -1,0 +1,38 @@
+[
+  {
+    "question": "Which investment tool is generally considered the safest?",
+    "questionimg": "",
+    "options": [
+      "Stocks",
+      "Bonds",
+      "Cryptocurrencies",
+      "Futures"
+    ],
+    "correctAnswer": 1,
+    "disable": false
+  },
+  {
+    "question": "What does the Price-to-Earnings (P/E) ratio measure?",
+    "questionimg": "",
+    "options": [
+      "Corporate debt level",
+      "Stock valuation",
+      "Market volatility",
+      "Dividend yield"
+    ],
+    "correctAnswer": 1,
+    "disable": false
+  },
+  {
+    "question": "Which index represents the U.S. technology stock market?",
+    "questionimg": "",
+    "options": [
+      "Dow Jones Industrial Average",
+      "S&P 500 Index",
+      "NASDAQ Composite Index",
+      "Russell 2000 Index"
+    ],
+    "correctAnswer": 2,
+    "disable": false
+  }
+]
