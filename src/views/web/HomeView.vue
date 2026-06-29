@@ -611,12 +611,12 @@
     <!-- Floating Contact Button (desktop only) -->
     <div class="contact-btn" v-if="!isMobile" @click="toggleContactPopup">
       <i class="bi bi-people-fill"></i>
-      Join Community
+      平台客服
     </div>
 
      <!-- Redirect Message -->
     <div class="redirect-message" v-show="showContactPopup">
-        <span class="text">Redirecting to WhatsApp Community</span><span class="dots"></span>
+        <span class="text">正在跳转平台客服</span><span class="dots"></span>
     </div>
     
     <!-- 移动端底部快速操作栏 -->
@@ -643,7 +643,7 @@
           <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
           <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
         </svg>
-        <span class="mobile-btn-label">Community</span>
+        <span class="mobile-btn-label">平台客服</span>
       </button>
     </div>
     <!-- Contact Popup
@@ -3451,10 +3451,13 @@ const formatLikesCount = (count: number | string | undefined) => {
 }
 
 .mobile-btn-label {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 500;
-  line-height: 1.1;
+  line-height: 1.15;
   white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .mobile-bottom-btn svg {
