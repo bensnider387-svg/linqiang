@@ -647,31 +647,21 @@ function handleUploadSuccess(response: any) {
 
 // 确认删除单个用户
 async function confirm(data:any) {
-  // 这个方法应该是单个删除的确认，在实际项目中可以根据需要实现
-   try {
-            // 批量删除用户（这里假设后端支持批量删除，否则可以循环调用deleteUser）
-           
-          const  Response=  await deleteUser(data.id)
-            if(Response.success)
-            {
-            layer.msg('删除成功', { icon: 1 })
-            // 刷新数据
-            change(page)
-            // 清空选择
-            selectedKeys.value = []
-            }
-            else
-            {
-              layer.msg('删除失败', { icon: 2 })
-            }
-          } catch (error) {
-            console.error('删除用户异常:', error)
-            layer.msg('删除失败', { icon: 2 })
-          } finally {
-            loading.value = false
-            layer.close(id)
-          }
-  layer.msg('您已成功删除')
+  try {
+    const response = await deleteUser(data.id)
+    if (response.success) {
+      layer.msg(response.message || '删除成功', { icon: 1 })
+      change(page)
+      selectedKeys.value = []
+    } else {
+      layer.msg(response.message || '删除失败', { icon: 2 })
+    }
+  } catch (error) {
+    console.error('删除用户异常:', error)
+    layer.msg('删除失败', { icon: 2 })
+  } finally {
+    loading.value = false
+  }
 }
 
 // 取消删除

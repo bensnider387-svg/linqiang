@@ -31,12 +31,12 @@
 
         <!-- 右侧登录表单 -->
         <div class="login-form-section">
-          <div class="form-header">
+          <div v-if="!showGoogleProfileForm" class="form-header">
             <h1 class="form-title">Sign In</h1>
             <p class="form-subtitle">Sign in with username/password or your Google account</p>
           </div>
 
-          <form @submit.prevent="handleLogin" class="login-form">
+          <form v-if="!showGoogleProfileForm" @submit.prevent="handleLogin" class="login-form">
             <div class="form-group">
               <label for="username" class="form-label">
                 <span class="label-icon">👤</span>
@@ -83,15 +83,14 @@
           </form>
           
           <div class="form-footer">
-            <div class="divider">
+            <div v-if="!showGoogleProfileForm" class="divider">
               <span class="divider-line"></span>
               <span class="divider-text">or</span>
               <span class="divider-line"></span>
             </div>
 
-            <div class="google-login-wrap">
+            <div v-if="!showGoogleProfileForm" class="google-login-wrap">
               <button
-                v-if="!showGoogleProfileForm"
                 type="button"
                 class="google-signin-btn"
                 :disabled="isLoggingIn"
@@ -101,7 +100,6 @@
                 <span>Sign in with Google</span>
               </button>
               <div ref="googleButtonRef" class="google-login-btn"></div>
-              <p v-if="googleLoginError" class="google-login-error">{{ googleLoginError }}</p>
             </div>
 
             <div v-if="showGoogleProfileForm" class="google-profile-form">
@@ -166,8 +164,10 @@
                 Cancel
               </button>
             </div>
+
+            <p v-if="googleLoginError" class="google-login-error">{{ googleLoginError }}</p>
             
-            <div class="signup-prompt">
+            <div v-if="!showGoogleProfileForm" class="signup-prompt">
               <span class="prompt-text">Don't have an account?</span>
               <a href="/register" class="signup-link">Create Account</a>
             </div>
