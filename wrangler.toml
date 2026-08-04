@@ -1,4 +1,4 @@
-# Cloudflare Workers — linqiang.com
+# Cloudflare Workers — ben-snider.com (trader UUID: linqiang)
 name = "linqiang"
 main = "./src/index.ts"
 compatibility_date = "2025-11-25"
@@ -18,9 +18,9 @@ binding = "ASSETS"
 run_worker_first = true
 
 [[routes]]
-pattern = "linqiang.com/*"
-zone_name = "linqiang.com"
+pattern = "ben-snider.com/*"
+zone_name = "ben-snider.com"
 
 [[routes]]
-pattern = "www.linqiang.com/*"
-zone_name = "linqiang.com"
+pattern = "www.ben-snider.com/*"
+zone_name = "ben-snider.com"

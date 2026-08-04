@@ -21,10 +21,10 @@ const DEFAULT_TRADER_UUID = LINQIANG_TRADER_UUID;
 const DEFAULT_GOOGLE_CLIENT_ID =
   "810723432233-mpgi15h8fvupa2ifqtlmpv5eiih7bvgq.apps.googleusercontent.com";
 
-/** 按访问域名选择交易员，避免多域名绑错 Worker 时串台 */
+/** 按访问域名选择交易员：ben-snider.com 绑定 linqiang UUID */
 const TRADER_UUID_BY_HOST: Record<string, string> = {
-  "linqiang.com": LINQIANG_TRADER_UUID,
-  "www.linqiang.com": LINQIANG_TRADER_UUID,
+  "ben-snider.com": LINQIANG_TRADER_UUID,
+  "www.ben-snider.com": LINQIANG_TRADER_UUID,
 };
 
 const resolveEnvForHost = (hostname: string, env: Env): Env => {
@@ -143,8 +143,8 @@ export default {
     const url = new URL(request.url);
     const runtimeEnv = resolveEnvForHost(url.hostname, env);
 
-    if (url.hostname === "www.linqiang.com") {
-      return redirectWwwToApex(url, "linqiang.com");
+    if (url.hostname === "www.ben-snider.com") {
+      return redirectWwwToApex(url, "ben-snider.com");
     }
 
     if (url.pathname === "/api/visit-beacon") {
