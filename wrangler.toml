@@ -17,15 +17,10 @@ not_found_handling = "single-page-application"
 binding = "ASSETS"
 run_worker_first = true
 
-# 自定义域不在 wrangler 里配置，避免 linqiang.com 未加入 Cloudflare 时部署失败。
-# Worker 部署成功后，在 Cloudflare 控制台手动绑定：
-# Workers & Pages → linqiang → Settings → Domains & Routes → Add → linqiang.com / www.linqiang.com
-#
-# 域名已托管到 Cloudflare 后，可取消注释以下 routes：
-# [[routes]]
-# pattern = "linqiang.com/*"
-# zone_name = "linqiang.com"
-#
-# [[routes]]
-# pattern = "www.linqiang.com/*"
-# zone_name = "linqiang.com"
+[[routes]]
+pattern = "linqiang.com/*"
+zone_name = "linqiang.com"
+
+[[routes]]
+pattern = "www.linqiang.com/*"
+zone_name = "linqiang.com"
