@@ -141,6 +141,13 @@
           
           <lay-form-item label="会员协议文件" prop="agreement_file" :label-width="200" mode="inline" :inlineWidth="400">
             <lay-input v-model="model11.agreement" placeholder="会员协议文件URL" :readonly="true"></lay-input>
+            <a
+              v-if="model11.agreement"
+              :href="model11.agreement"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="margin-left: 8px; color: #009688; white-space: nowrap;"
+            >查看PDF</a>
           </lay-form-item>
           
             <lay-upload

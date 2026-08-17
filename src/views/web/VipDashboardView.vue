@@ -683,7 +683,14 @@
         </div>
       </div>
       <div class="agreement-footer">
-        <a class="view-agreement-btn" :href="trader_profiles.agreement" target="_blank" rel="noopener noreferrer" style="display:block;text-decoration:none;">
+        <a
+          v-if="trader_profiles.agreement"
+          class="view-agreement-btn"
+          :href="trader_profiles.agreement"
+          target="_blank"
+          rel="noopener noreferrer"
+          style="display:block;text-decoration:none;"
+        >
           View Full Agreement
         </a>
       </div>
@@ -953,6 +960,7 @@ const gettraderprofiles= async()=>{
     const res=await gettrader_profiles();
     if(res.success && res.data && res.data.trader_profiles){
       const traderProfile = res.data.trader_profiles;
+      trader_profiles.value = traderProfile;
       // 检查terms是否存在且为字符串
       if (traderProfile.terms && typeof traderProfile.terms === 'string') {
         // 将terms字符串按行分割成数组
